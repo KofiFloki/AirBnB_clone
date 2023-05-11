@@ -48,3 +48,7 @@ class BaseModel:
         dict_re['created_at'] = self.created_at.isoformat()
         dict_re['updated_at'] = self.updated_at.isoformat()
         return dict_re 
+
+     """Return the print/str representation of the BaseModel instance."""
+        clname = self.__class__.__name__
+        return "[{}] ({}) {}".format(clname, self.id, self.__dict__)
