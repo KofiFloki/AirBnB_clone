@@ -4,7 +4,7 @@
 Unittest class:
     TestBaseModel_instantiation
     TestBaseModel_save
-    TestBaseModel_to_dict
+    TestBaseMode
 """
 import os
 import models
