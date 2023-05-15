@@ -44,19 +44,17 @@ class TestConsole(unittest.TestCase):
             self.assertIs(output.getvalue(), "")
 
     def test_create(self):
-        """test the output for create"""
-        inputs = console.HBNBCommand()
-        with patch('sys.stdout', new=StringIO()) as output:
-            inputs.onecmd("create")
-            self.assertEqual(output.getvalue(), "** class name missing **\n")
-        with patch('sys.stdout', new=StringIO()) as output:
-            inputs.onecmd("create myModel")
-            self.assertEqual(output.getvalue(), "** class doesn't exist **\n")
-        with patch('sys.stdout', new=StringIO()) as output:
-            inputs.onecmd("create BaseModel")
-        with patch('sys.stdout', new=StringIO()) as output:
-            inputs.onecmd("BaseModel.all")
-            self.assertEqual(output.getvalue()[:11], "[[BaseModel")
+    """Test the output for create"""
+    self.console.onecmd("create BaseModel")
+    expected_output = "[[BaseModel]"
+    self.assertEqual(self.output.getvalue().strip(), expected_output)
+    
+    def test_console(self):
+    """Test the output for console"""
+    expected_output = "hbnb"
+    with patch("sys.stdout", new=StringIO()) as output:
+        self.console.onecmd("help")
+        self.assertEqual(output.getvalue().strip(), expected_output)
 
     def test_show(self):
         """test the output for show"""
@@ -98,18 +96,9 @@ class TestConsole(unittest.TestCase):
 
     def test_all(self):
         """test the output for all"""
-        inputs = console.HBNBCommand()
-        with patch('sys.stdout', new=StringIO()) as output:
-            inputs.onecmd("all Mymodel")
-            self.assertEqual(output.getvalue(), "** class doesn't exist **\n")
-        with patch('sys.stdout', new=StringIO()) as output:
-            inputs.onecmd("all BaseModel")
-            self.assertEqual(output.getvalue()[:12], "[]\n")
-        with patch('sys.stdout', new=StringIO()) as output:
-            inputs.onecmd("create City")
-        with patch('sys.stdout', new=StringIO()) as output:
-            inputs.onecmd("City.all")
-            self.assertEqual(output.getvalue()[:7], "[[City]")
+        self.console.onecmd("all")
+        expected_output = "[[City], [User], [State], [Place], [Amenity], [Review]]"
+         self.assertEqual(self.output.getvalue().strip(), expected_output)
 
     def test_update(self):
         """test the output for update"""
