@@ -8,6 +8,7 @@ from models.city import City
 from models.place import Place
 from models.amenity import Amenity
 from models.review import Review
+from datetime import datetime
 
 
 class FileStorage:
@@ -53,13 +54,15 @@ class FileStorage:
         attributes = {
             "BaseModel":
                      {"id": str,
-                      "created_at": datetime.datetime,
-                      "updated_at": datetime.datetime},
+                      "created_at": datetime,
+                      "updated_at": datetime
+                      },
             "User":
                      {"email": str,
                       "password": str,
                       "first_name": str,
-                      "last_name": str},
+                      "last_name": str
+                      },
             "State":
                      {"name": str},
             "City":

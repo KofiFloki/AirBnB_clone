@@ -35,8 +35,8 @@ class HBNBCommand(cmd.Cmd):
     """provides the entry point to the imterpreter"""
 
     prompt = "(hbnb) "
-    my_classes = {"BaseModel", "User", "State", "City",
-                  "Amenity", "Place", "Review"}
+    __classes = {"BaseModel", "User", "State", "City",
+                 "Amenity", "Place", "Review"}
 
     def emptyline(self):
         """Do nothing upon receiving an empty line."""
