@@ -1,51 +1,52 @@
 #!/usr/bin/python3
-"""Base classmodels contains the Base class for the AirBnB clone console.
+"""
+This model defines BaseModel class
 """
 
-import uuid
+from uuid import uuid4
 from datetime import datetime
-from models import storage 
+import models
+
 
 class BaseModel:
+    """
+    BaseModel class defines all common attributes/methods for other classes
+    """
 
-     """
-     This class defines all common attributes/methods for other classes.
-     """
+    def __init__(self, *args, **kwargs):
+        """Initialization of the BaseModel class"""
 
-     def __init__(self, **args, **kwargs):
-         """
-         initializes BaseModel class
-         """
-        
-        time_format =  %Y-%m-%dT%H:%M:%S.%f
+        time_format = "%Y-%m-%dT%H:%M:%S.%f"
         self.id = str(uuid4())
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
         if len(kwargs) != 0:
             for key, value in kwargs.items():
                 if key == "created_at" or key == "updated_at":
-                    self.__dict__[key] = datetime.strptime(value, time_format
+                    self.__dict__[key] = datetime.strptime(value, time_format)
                 else:
                     self.__dict__[key] = value
         else:
             models.storage.new(self)
 
     def __str__(self):
-    """returns the string representation of the instance of BaseModel class"""
-        return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
-    
+        """returns the str representation of the instance of BaseModel class"""
+        return "[{}] ({}) {}".format(self.__class__.__name__,
+                                     self.id, self.__dict__)
+
     def save(self):
-    """updates public instance attribute updated_at with current datetime"""
-        storage.save(self)
-        
+        """updates attribute updated_at with current datetime"""
+        self.updated_at = datetime.now()
+        models.storage.save()
+
     def to_dict(self):
-    """returns dictionary containing all keys/values of __dict__ of the instance"""
+        """returns dictionary with all keys/values of __dict__ """
         dict_re = self.__dict__.copy()
         dict_re['__class__'] = self.__class__.__name__
         dict_re['created_at'] = self.created_at.isoformat()
         dict_re['updated_at'] = self.updated_at.isoformat()
-        return dict_re 
+        return dict_re
 
-     """Return the print/str representation of the BaseModel instance."""
-        clname = self.__class__.__name__
-        return "[{}] ({}) {}".format(clname, self.id, self.__dict__)
+    def __repr__(self):
+        """returns the string representation"""
+        return (self.__str__())
