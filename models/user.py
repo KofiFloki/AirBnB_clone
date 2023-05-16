@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-This is user subclass  model
+user subclass  model
 """
 
 from models.base_model import BaseModel

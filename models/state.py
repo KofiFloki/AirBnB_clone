@@ -5,6 +5,6 @@ from models.base_model import BaseModel
 
 
 class State(BaseModel):
-    """This Class State inherits from the Class BAseModel"""
+    """State class inherits from the Class BAseModel"""
 
     name = ""
