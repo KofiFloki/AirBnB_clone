@@ -3,7 +3,7 @@
 Amenity subclass model inheriting from BaseModel
 """
 
-from models.base.model import BaseModel
+from models.base_model import BaseModel
 
 
 class Amenity(BaseModel):
